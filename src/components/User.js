@@ -42,7 +42,7 @@ class User extends React.Component {
                 date_of_birth: this.state.date_of_birth,
                 bio: this.state.bio,
                 email: this.state.email,
-                username: this.props.user.username
+                username: JSON.parse(window.localStorage.user).username 
             })
         }
 
@@ -91,7 +91,7 @@ class User extends React.Component {
                     </div>
                     {this.state.display ?
                         <div className='container'>
-                            <form onSubmit={this.uploadPhoto}>
+                            <form onSubmit={this.submitHandler}>
                                 <label>Name:</label>
                                 <input type='text' name='name' value={this.state.name} onChange={this.changeHandler}/>
                                 <label>Date of Birth:</label>
