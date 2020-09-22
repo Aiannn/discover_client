@@ -15,15 +15,15 @@ import './App.css'
 class App extends React.Component {
 
   state = {
-    user: false,
-    postsArray: [],
-    likedPosts: []
+    user: false
   }
 
   componentDidMount() {
-    this.getPosts()
-    this.getLikedPosts()
+    this.getUserData()
+  }
 
+
+  getUserData = () => {
     const token = localStorage.getItem('token')
     if (token) {
       fetch("http://localhost:3000/api/v1/profile", {
@@ -36,9 +36,12 @@ class App extends React.Component {
       .then(data => {
           console.log(data)
           this.setState({
-              user: data.user,
+              user: data.user
           })
       })
+    }
+    else {
+      this.props.history.push('signup')
     }
   }
 
@@ -109,43 +112,7 @@ class App extends React.Component {
     localStorage.removeItem('user')
     this.props.history.push('/login')
     this.setState({
-      user: false,
-      postsArray: [],
-      likedPosts: []
-    })
-  }
-
-  getPosts = () => {
-    const token = localStorage.getItem('token')
-    fetch('http://localhost:3000/feeds', {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data.posts[0])
-      this.setState({
-        postsArray: data.posts[0]
-      })
-    })
-  }
-  
-  getLikedPosts = () => {
-    const token = localStorage.getItem('token')
-    fetch('http://localhost:3000/likes', {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data)
-      this.setState({
-        likedPosts: data
-      })
+      user: false
     })
   }
 
@@ -154,9 +121,9 @@ class App extends React.Component {
       <Switch>
         <div>
           <NavBar logoutHandler={this.logoutHandler} user={this.state.user}/>
-          <Route exact path='/feeds' render={() => <Feeds posts={this.state.postsArray} />} />
+          <Route exact path='/feeds' render={() => <Feeds />} />
           <Route exact path='/about' render={() => <About />} />
-          <Route exact path='/liked' render={() => <Liked liked={this.state.likedPosts} />} />
+          <Route exact path='/liked' render={() => <Liked />} />
           <Route exact path='/signup' render={() => <SignUp signupHandler={this.signupHandler}/>} />
           <Route exact path='/login' render={() => <LogIn loginHandler={this.loginHandler}/>} />
           <Route exact path='/user' render={() => <User updateCurrentUser={this.updateCurrentUser} user={this.state.user} />} />

@@ -25,6 +25,7 @@ class Post extends React.Component {
     render() {
         return (
             <div className='post'>
+                <div>{this.props.post.user.username}</div>
                 <div>{this.props.post.title}</div>
                 <div><img src={'http://localhost:3000/'+this.props.post.image} alt={this.props.post.title}/></div>
                 <div><audio src={'http://localhost:3000/'+this.props.post.track} controls></audio></div>
