@@ -3,8 +3,19 @@ import '../styles/Post.css'
 
 class Post extends React.Component {
 
+    state = {
+        likes: this.props.post.likes.length
+    }
+
+    clickLike = () => {
+        this.setState({
+            likes: this.props.post.likes.length + 1 //Optimistic Rendering
+        })
+    }
+
     clickHandler = () => {
 
+        this.clickLike()
         let obj = {
             method: 'POST',
             headers: {
@@ -29,7 +40,7 @@ class Post extends React.Component {
                 <div>{this.props.post.title}</div>
                 <div><img src={'http://localhost:3000/'+this.props.post.image} alt={this.props.post.title}/></div>
                 <div><audio src={'http://localhost:3000/'+this.props.post.track} controls></audio></div>
-                <div><button onClick={this.clickHandler}>Like</button><span>{this.props.post.likes.length} likes</span></div>
+                <div><button onClick={this.clickHandler}>Like</button><span>{this.state.likes} likes</span></div>
             </div>
         )
     }

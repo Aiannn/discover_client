@@ -15,8 +15,35 @@ class User extends React.Component {
         display2: false,
         image: '',
         track: '',
-        title: ''
+        title: '',
+        userPosts: []
     }
+
+    componentDidMount() {
+        this.getUserData()
+    }
+
+    getUserData = () => {
+        const token = localStorage.getItem('token')
+        if (token) {
+          fetch("http://localhost:3000/api/v1/profile", {
+              method: 'GET',
+              headers: {
+                  Authorization: `Bearer ${token}`
+              }
+          })
+          .then(response => response.json())
+          .then(data => {
+              console.log(data)
+              this.setState({
+                  userPosts: data.user.posts
+              })
+          })
+        }
+        else {
+          this.props.history.push('signup')
+        }
+      }
 
     changeHandler = (e) => {
         this.setState({
@@ -48,34 +75,16 @@ class User extends React.Component {
         }
     }
 
-    submitHandler = (e) => {
-        e.preventDefault()
-
-        let obj = {
-            method: 'PATCH',
-            headers: {
-                'content-type': 'application/json',
-                'accept': 'application/json'
-            },
-            body: JSON.stringify({
-                avatar: this.state.avatar,
-                name: this.state.name,
-                date_of_birth: this.state.date_of_birth,
-                bio: this.state.bio,
-                email: this.state.email,
-                username: JSON.parse(window.localStorage.user).username 
-            })
-        }
-
-        fetch('http://localhost:3000/api/v1/users/profile', obj)
-        .then(response => response.json())
-        .then(console.log)
-    }
-
-    uploadPhoto = (e) => {
+    updateUserInfo = (e) => {
         e.preventDefault()
         const formData = new FormData();
         formData.append("avatar", this.state.avatar)
+        formData.append("name", this.state.name)
+        formData.append("date_of_birth", this.state.date_of_birth)
+        formData.append("bio", this.state.bio)
+        formData.append("email", this.state.email)
+        formData.append("user", this.props.user.username)
+
         
         fetch(`http://localhost:3000/api/v1/users/profile`, {
           method: "PATCH",
@@ -83,7 +92,8 @@ class User extends React.Component {
         })
           .then(res => res.json())
           .then(data => {
-           console.log(data)
+            console.log(data)
+            this.props.updateUser(data.user)
           })
     }
 
@@ -92,7 +102,7 @@ class User extends React.Component {
         const formData = new FormData()
         formData.append('image', this.state.image)
         formData.append('track', this.state.track)
-        formData.append('user', JSON.parse(window.localStorage.user).username)
+        formData.append('user', this.props.user.username)
         formData.append('title', this.state.title) 
 
         fetch(`http://localhost:3000/posts`, {
@@ -102,6 +112,9 @@ class User extends React.Component {
         .then(res => res.json())
         .then(data => {
             console.log(data)
+            this.setState({
+                userPosts: [...this.state.userPosts, data]
+            })
         })
     }
 
@@ -123,14 +136,14 @@ class User extends React.Component {
                 {window.localStorage.length > 0 ?
                 <div>
                     <div>
-                        <div>Welcome, {JSON.parse(window.localStorage.user).username}</div>
-                        <div>Name: {JSON.parse(window.localStorage.user).name}</div>
-                        <div>Date of Birth: {JSON.parse(window.localStorage.user).date_of_birth}</div>
-                        <div>Bio: {JSON.parse(window.localStorage.user).bio}</div>
-                        <div>Email: {JSON.parse(window.localStorage.user).email}</div>
-                        <div>Followers: {JSON.parse(window.localStorage.user).followers.length}</div>
-                        <div>Followings: {JSON.parse(window.localStorage.user).followees.length}</div>
-                        <div><img src={'http://localhost:3000/'+JSON.parse(window.localStorage.user).avatar} width='200' height='300' alt={JSON.parse(window.localStorage.user).name}/></div>
+                        <div>Welcome, {this.props.user.username}</div>
+                        <div>Name: {this.props.user.name}</div>
+                        <div>Date of Birth: {this.props.user.date_of_birth}</div>
+                        <div>Bio: {this.props.user.bio}</div>
+                        <div>Email: {this.props.user.email}</div>
+                        <div>Followers: {this.props.user.followers && this.props.user.followers.length}</div>
+                        <div>Followings: {this.props.user.followees && this.props.user.followees.length}</div>
+                        <div><img src={'http://localhost:3000/'+this.props.user.avatar} width='200' height='300' alt={JSON.parse(window.localStorage.user).name}/></div>
                     </div>
                     <div>
                         <button onClick={this.displayUpdateForm}>Update Info</button>
@@ -138,7 +151,7 @@ class User extends React.Component {
                     </div>
                     {this.state.display ?
                         <div className='container'>
-                            <form onSubmit={this.submitHandler}>
+                            <form onSubmit={this.updateUserInfo}>
                                 <label>Name:</label>
                                 <input type='text' name='name' value={this.state.name} onChange={this.changeHandler}/>
                                 <label>Date of Birth:</label>
@@ -171,7 +184,7 @@ class User extends React.Component {
                         null
                     }
                     <div>
-                        <PostContainer posts={JSON.parse(localStorage.user).posts} />
+                        <PostContainer posts={this.state.userPosts} />
                     </div>
                 </div>
                 :

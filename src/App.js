@@ -18,6 +18,12 @@ class App extends React.Component {
     user: false
   }
 
+  updateUser = (updUser) => {
+    this.setState({
+      user: updUser
+    })
+  }
+
   componentDidMount() {
     this.getUserData()
   }
@@ -43,12 +49,6 @@ class App extends React.Component {
     else {
       this.props.history.push('signup')
     }
-  }
-
-  updateCurrentUser = data => {
-    this.setState({
-      user: data.user
-    })
   }
 
   signupHandler = (userObj) => {
@@ -126,7 +126,7 @@ class App extends React.Component {
           <Route exact path='/liked' render={() => <Liked />} />
           <Route exact path='/signup' render={() => <SignUp signupHandler={this.signupHandler}/>} />
           <Route exact path='/login' render={() => <LogIn loginHandler={this.loginHandler}/>} />
-          <Route exact path='/user' render={() => <User updateCurrentUser={this.updateCurrentUser} user={this.state.user} />} />
+          <Route exact path='/user' render={() => <User updateUser={this.updateUser} user={this.state.user} />} />
         </div>
       </Switch>
     )
