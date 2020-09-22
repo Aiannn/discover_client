@@ -17,19 +17,34 @@ class App extends React.Component {
   state = {
     user: false,
     postsArray: [],
-    avatar: '',
     likedPosts: []
   }
 
   componentDidMount() {
     this.getPosts()
     this.getLikedPosts()
+
+    const token = localStorage.getItem('token')
+    if (token) {
+      fetch("http://localhost:3000/api/v1/profile", {
+          method: 'GET',
+          headers: {
+              Authorization: `Bearer ${token}`
+          }
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log(data)
+          this.setState({
+              user: data.user,
+          })
+      })
+    }
   }
 
   updateCurrentUser = data => {
     this.setState({
-      user: data.user,
-      avatar: data.avatar_url
+      user: data.user
     })
   }
 
@@ -82,7 +97,6 @@ class App extends React.Component {
       if (data.jwt) {
         localStorage.setItem('token', data.jwt)
         localStorage.setItem('user', JSON.stringify(data.user))
-        localStorage.setItem('avatar', data.avatar)
       }
       this.setState({
         user: data.user
@@ -93,28 +107,42 @@ class App extends React.Component {
   logoutHandler = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
-    localStorage.removeItem('avatar')
     this.props.history.push('/login')
     this.setState({
-      user: false
+      user: false,
+      postsArray: [],
+      likedPosts: []
     })
   }
 
   getPosts = () => {
-    fetch('http://localhost:3000/posts')
+    const token = localStorage.getItem('token')
+    fetch('http://localhost:3000/feeds', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
     .then(response => response.json())
-    .then(posts => {
-      console.log(posts)
+    .then(data => {
+      console.log(data.posts[0])
       this.setState({
-        postsArray: posts
+        postsArray: data.posts[0]
       })
     })
   }
   
   getLikedPosts = () => {
-    fetch('http://localhost:3000/likes')
+    const token = localStorage.getItem('token')
+    fetch('http://localhost:3000/likes', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
     .then(response => response.json())
     .then(data => {
+      console.log(data)
       this.setState({
         likedPosts: data
       })

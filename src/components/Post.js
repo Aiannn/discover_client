@@ -12,7 +12,7 @@ class Post extends React.Component {
                 'accept': 'application/json'
             },
             body: JSON.stringify({
-                user: this.props.user,
+                user: JSON.parse(window.localStorage.user).username,
                 post: this.props.post
             })
         }
@@ -26,9 +26,9 @@ class Post extends React.Component {
         return (
             <div className='post'>
                 <div>{this.props.post.title}</div>
-                <img src={'http://localhost:3000/'+this.props.post.image} alt={this.props.post.title}/>
-                <audio src={this.props.post.track} controls></audio>
-                <button onClick={this.clickHandler}>Like</button>
+                <div><img src={'http://localhost:3000/'+this.props.post.image} alt={this.props.post.title}/></div>
+                <div><audio src={'http://localhost:3000/'+this.props.post.track} controls></audio></div>
+                <div><button onClick={this.clickHandler}>Like</button><span>{this.props.post.likes.length} likes</span></div>
             </div>
         )
     }

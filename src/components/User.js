@@ -1,6 +1,7 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 import '../styles/User.css'
+import PostContainer from './PostContainer'
 
 class User extends React.Component {
 
@@ -10,7 +11,11 @@ class User extends React.Component {
         bio: '',
         email: '',
         avatar: '',
-        display: false 
+        display: false,
+        display2: false,
+        image: '',
+        track: '',
+        title: ''
     }
 
     changeHandler = (e) => {
@@ -23,6 +28,22 @@ class User extends React.Component {
         if (e.target.files[0]) {
             this.setState({
                 avatar: e.target.files[0]
+            })
+        }
+    }
+
+    handleImagePostChange = e => {
+        if (e.target.files[0]) {
+            this.setState({
+                image: e.target.files[0]
+            })
+        }
+    }
+
+    handleTrackPostChange = e => {
+        if (e.target.files[0]) {
+            this.setState({
+                track: e.target.files[0]
             })
         }
     }
@@ -56,7 +77,6 @@ class User extends React.Component {
         const formData = new FormData();
         formData.append("avatar", this.state.avatar)
         
-        // configure your fetch url appropriately
         fetch(`http://localhost:3000/api/v1/users/profile`, {
           method: "PATCH",
           body: formData
@@ -67,11 +87,35 @@ class User extends React.Component {
           })
     }
 
+    uploadPost = e => {
+        e.preventDefault()
+        const formData = new FormData()
+        formData.append('image', this.state.image)
+        formData.append('track', this.state.track)
+        formData.append('user', JSON.parse(window.localStorage.user).username)
+        formData.append('title', this.state.title) 
+
+        fetch(`http://localhost:3000/posts`, {
+            method: 'POST',
+            body: formData 
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+        })
+    }
+
     displayUpdateForm = () => {
         this.setState({
             display: !this.state.display
         })
     }
+
+    displayUpdateFormTwo = () => {
+        this.setState({
+            display2: !this.state.display2 
+        })
+    }    
 
     render() {
         return (
@@ -84,10 +128,13 @@ class User extends React.Component {
                         <div>Date of Birth: {JSON.parse(window.localStorage.user).date_of_birth}</div>
                         <div>Bio: {JSON.parse(window.localStorage.user).bio}</div>
                         <div>Email: {JSON.parse(window.localStorage.user).email}</div>
-                        <div><img src={window.localStorage.avatar} width='200' height='300' alt={JSON.parse(window.localStorage.user).name}/></div>
+                        <div>Followers: {JSON.parse(window.localStorage.user).followers.length}</div>
+                        <div>Followings: {JSON.parse(window.localStorage.user).followees.length}</div>
+                        <div><img src={'http://localhost:3000/'+JSON.parse(window.localStorage.user).avatar} width='200' height='300' alt={JSON.parse(window.localStorage.user).name}/></div>
                     </div>
                     <div>
                         <button onClick={this.displayUpdateForm}>Update Info</button>
+                        <button onClick={this.displayUpdateFormTwo}>Upload Post</button>
                     </div>
                     {this.state.display ?
                         <div className='container'>
@@ -108,6 +155,24 @@ class User extends React.Component {
                         :
                         null 
                     }
+                    {this.state.display2 ?
+                        <div>
+                            <form onSubmit={this.uploadPost}>
+                                <label>Title</label>
+                                <input type='text' name='title' value={this.state.title} onChange={this.changeHandler} />
+                                <label>Image</label>
+                                <input type='file' name='image' accept='image/png, image/jpeg' onChange={this.handleImagePostChange} />
+                                <label>Track</label>
+                                <input type='file' name='track' accept='audio/mp3, audio/mpeg' onChange={this.handleTrackPostChange}/>
+                                <input type='submit' value='Upload' />
+                            </form>
+                        </div>
+                        :
+                        null
+                    }
+                    <div>
+                        <PostContainer posts={JSON.parse(localStorage.user).posts} />
+                    </div>
                 </div>
                 :
                 <Redirect to='/signup' />

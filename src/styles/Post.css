@@ -1,4 +1,9 @@
+img {
+  width: 20%;
+  height: auto 
+}
+
 .post {
-    display: flex;
-    justify-content: center;
-  }
+  justify-content: center;
+}
+
