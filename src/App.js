@@ -9,6 +9,7 @@ import Liked from './components/Liked'
 import SignUp from './components/SignUp'
 import LogIn from './components/LogIn'
 import User from './components/User'
+import Users from './components/Users'
 import './App.css'
 
 
@@ -127,6 +128,7 @@ class App extends React.Component {
           <Route exact path='/signup' render={() => <SignUp signupHandler={this.signupHandler}/>} />
           <Route exact path='/login' render={() => <LogIn loginHandler={this.loginHandler}/>} />
           <Route exact path='/user' render={() => <User updateUser={this.updateUser} user={this.state.user} />} />
+          <Route exact path='/users/:userId' render={() => <Users />} />
         </div>
       </Switch>
     )
