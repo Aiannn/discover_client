@@ -16,7 +16,8 @@ import './App.css'
 class App extends React.Component {
 
   state = {
-    user: false
+    user: false,
+    signupMessage: ''
   }
 
   updateUser = (updUser) => {
@@ -42,6 +43,8 @@ class App extends React.Component {
       .then(response => response.json())
       .then(data => {
           console.log(data)
+          localStorage.removeItem('user')
+          localStorage.setItem('user', JSON.stringify(data.user))
           this.setState({
               user: data.user
           })
@@ -71,9 +74,10 @@ class App extends React.Component {
       console.log(data) //TESTING_PURPOSES
       if (data.jwt) {
         localStorage.setItem('token', data.jwt)
+        localStorage.setItem('user', JSON.stringify(data.user))
         this.setState({
           user: data.user
-        })
+        }, () => this.props.history.push('/about'))
       } else {
         this.setState({
           signupMessage: data.error
@@ -121,14 +125,14 @@ class App extends React.Component {
     return (
       <Switch>
         <div>
-          <NavBar logoutHandler={this.logoutHandler} user={this.state.user}/>
+          <NavBar  logoutHandler={this.logoutHandler} user={this.state.user}/>
           <Route exact path='/feeds' render={() => <Feeds />} />
           <Route exact path='/about' render={() => <About />} />
           <Route exact path='/liked' render={() => <Liked />} />
           <Route exact path='/signup' render={() => <SignUp signupHandler={this.signupHandler}/>} />
           <Route exact path='/login' render={() => <LogIn loginHandler={this.loginHandler}/>} />
           <Route exact path='/user' render={() => <User updateUser={this.updateUser} user={this.state.user} />} />
-          <Route exact path='/users/:userId' render={() => <Users />} />
+          <Route exact path='/users/:userName' render={() => <Users currentUser={this.state.user}/>} />
         </div>
       </Switch>
     )

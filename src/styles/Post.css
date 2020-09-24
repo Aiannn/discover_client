@@ -4,6 +4,9 @@ img {
 }
 
 .post {
-  justify-content: center;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  margin: auto;
 }
 
