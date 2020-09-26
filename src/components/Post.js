@@ -1,6 +1,8 @@
 import React from 'react'
 import '../styles/Post.css'
 
+
+//It's unnessesarily anymore. Instead Post I use PostCard
 class Post extends React.Component {
 
     state = {

@@ -1,17 +1,22 @@
 import React from 'react'
-import Post from './Post'
+import PostCard from './PostCard'
 
 class PostContainer extends React.Component {
 
     getPosts = () => {
         return this.props.posts.map(post => {
-            return <Post post={post} />
+            return (
+                <React.Fragment>
+                    <PostCard post={post}/>
+                </React.Fragment>
+            )
         })
     }
 
+
     render() {
         return (
-            <div>
+            <div class='post-container'>
                 {this.getPosts()}
             </div>
         )

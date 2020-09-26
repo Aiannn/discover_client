@@ -26,6 +26,9 @@ class NavBar extends React.Component {
                             <li>Sign Up</li>
                         </NavLink>
                     }
+                    <NavLink to='/foryou'>
+                        <li>For You</li>
+                    </NavLink>
                     {window.localStorage.length > 0 ? 
                         <li onClick={this.props.logoutHandler}>Log Out</li>
                         :
