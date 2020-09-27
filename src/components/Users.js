@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import PostContainer from './PostContainer'
 
 
+//It's unnessesarily anymore. Instead Users I use UserShowPage
 class Users extends React.Component {
 
     state = {

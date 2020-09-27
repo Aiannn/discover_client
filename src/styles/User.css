@@ -1,4 +1,4 @@
-input[type=text], select {
+/* input[type=text], select {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -27,4 +27,9 @@ input[type=text], select {
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
-  }
+  } */
+
+  /* img {
+    width: 20%;
+    height: 20%
+  } */

@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 // import { Dropdown } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 
+//no need for it, instead i use SearchBar.js
 class Search extends React.Component {
 
     state = {

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, Icon, Image } from 'semantic-ui-react'
 import { Button } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 class PostCard extends React.Component {
 
@@ -91,9 +92,9 @@ class PostCard extends React.Component {
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <a>
+          <a href={`users/${this.props.post.user.username}`}>
             <Icon name='user' />
-            {this.props.post.user.username}
+              {this.props.post.user.username}
           </a>
         </Card.Content>
       </Card>

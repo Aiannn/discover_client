@@ -1,5 +1,6 @@
 import React from 'react'
 import PostCard from './PostCard'
+import '../styles/PostContainer.css'
 
 class PostContainer extends React.Component {
 
@@ -16,7 +17,7 @@ class PostContainer extends React.Component {
 
     render() {
         return (
-            <div class='post-container'>
+            <div className='post-container'>
                 {this.getPosts()}
             </div>
         )

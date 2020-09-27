@@ -3,6 +3,8 @@ import { Redirect } from 'react-router-dom'
 import '../styles/User.css'
 import PostContainer from './PostContainer'
 
+
+//Dont need it anymore I use Profile Instead
 class User extends React.Component {
 
     state = {

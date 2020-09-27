@@ -1,5 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import PostContainer from './PostContainer'
 import { Card, Icon, Image, Button } from 'semantic-ui-react'
 
@@ -93,7 +94,9 @@ class UserShowPage extends React.Component {
                 <Card>
                     <Image src={'http://localhost:3000/'+this.state.otherUser.avatar} alt={this.state.otherUser.name} wrapped ui={false} />
                     <Card.Content>
-                    <Card.Header>{this.state.otherUser.username}</Card.Header>
+                    <Card.Header>
+                        {this.state.otherUser.username}
+                    </Card.Header>
                     <Card.Meta>
                         <span className='date'>{this.state.otherUser.name}</span>
                     </Card.Meta>
@@ -101,6 +104,7 @@ class UserShowPage extends React.Component {
                         <div>Date of Birth: {this.state.otherUser.date_of_birth}</div>
                         <div>Bio: {this.state.otherUser.bio}</div>
                         <div>Email: {this.state.otherUser.email}</div>
+                        <div>Total likes: {this.state.otherUser.total_likes}</div>
                         <div>
                             <Button 
                                 onClick = {this.clickHandler}
