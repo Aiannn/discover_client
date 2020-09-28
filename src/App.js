@@ -141,7 +141,7 @@ class App extends React.Component {
           <Route exact path='/user' render={() => <Profile updateUser={this.updateUser} user={this.state.user} />} />
           <Route exact path='/users/:userName' render={() => <UserShowPage currentUser={this.state.user}/>} />
           <Route exact path='/foryou' render={() => <ForYou />} />
-          <Route exact path='/users/:userName/follows' render={() => <FollowDimmer />} />
+          {/* <Route exact path='/users/:userName/follows' render={() => <FollowDimmer />} /> */}
         </div>
       </Switch>
     )

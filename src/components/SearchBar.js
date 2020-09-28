@@ -1,4 +1,6 @@
 import React from 'react'
+import { Image } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 class SearchBar extends React.Component {
     state = {
@@ -44,7 +46,7 @@ class SearchBar extends React.Component {
   
     render() {
       return (
-        <div className="searchForm">
+        <div className="searchForm" style={{marginLeft: '120%'}}> 
           <form>
             <input
               placeholder="Search for..."
@@ -52,7 +54,16 @@ class SearchBar extends React.Component {
               onChange={this.handleInputChange}
             />
           </form>
-          <div>{(this.state.query.length===0) ? null :this.state.filteredData.map(i => <p>{i.username}</p>)}</div>
+          <div>
+            {(this.state.query.length===0) ? null : this.state.filteredData.map(user => 
+            <Link to={`/users/${user.username}`}>
+              <div>
+                <Image src={'http://localhost:3000/'+user.avatar}  />
+                <span>{user.username}</span>
+              </div>
+            </Link>
+            )}
+          </div>
         </div>
       );
     }

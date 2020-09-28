@@ -1,5 +1,6 @@
 import React from 'react'
-import { Card, Icon, Image, Button, Form, FormField } from 'semantic-ui-react'
+import { Card, Icon, Image, Button, Form, FormField, Dimmer, Header } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 import '../styles/User.css'
 import PostContainer from './PostContainer'
 
@@ -16,8 +17,16 @@ class Profile extends React.Component {
         image: '',
         track: '',
         title: '',
-        userPosts: []
+        userPosts: [],
+        activeFollowers: false, //it's for dimmer 
+        activeFollowings: false 
     }
+
+    handleOpenFollowers = () => this.setState({ activeFollowers: true })
+    handleCloseFollowers = () => this.setState({ activeFollowers: false })
+
+    handleOpenFollowings = () => this.setState({ activeFollowings: true })
+    handleCloseFollowings = () => this.setState({ activeFollowings: false })
 
     componentDidMount() {
         this.getUserData()
@@ -131,6 +140,7 @@ class Profile extends React.Component {
     }    
 
     render() {
+        // const { active } = this.state
         return (
             <React.Fragment>
                 <Card>
@@ -150,14 +160,51 @@ class Profile extends React.Component {
                     </Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                    <a>
+
+                    <a onClick={this.handleOpenFollowers}>
                         <Icon name='user' />
                         Followers {this.props.user.followers && this.props.user.followers.length}
                     </a>
-                    <a>
+                    <Dimmer active={this.state.activeFollowers} onClickOutside={this.handleCloseFollowers} page>
+                        <Header as='h2' icon inverted>
+                            <Icon name='user' />
+                                Followers
+                            <Header.Subheader>
+                                <div>
+                                    {this.props.user.followers && this.props.user.followers.map(i => 
+                                    <Link to={`/users/${i.username}`} >
+                                        <p>
+                                            {i.username}
+                                        </p>
+                                    </Link>
+                                    )}
+                                </div>
+                            </Header.Subheader>
+                        </Header>
+                    </Dimmer>
+
+                    <a onClick={this.handleOpenFollowings}>
                         <Icon name='user' />
                         Followings {this.props.user.followees && this.props.user.followees.length}
                     </a>
+                    <Dimmer active={this.state.activeFollowings} onClickOutside={this.handleCloseFollowings} page>
+                        <Header as='h2' icon inverted>
+                            <Icon name='user' />
+                                Followings
+                            <Header.Subheader>
+                                <div>
+                                    {this.props.user.followees && this.props.user.followees.map(i => 
+                                    <Link to={`/users/${i.username}`} >
+                                        <p>
+                                            {i.username}
+                                        </p>
+                                    </Link>
+                                    )}
+                                </div>
+                            </Header.Subheader>
+                        </Header>
+                    </Dimmer>
+
                     </Card.Content>
                 </Card>
                 <Button 
