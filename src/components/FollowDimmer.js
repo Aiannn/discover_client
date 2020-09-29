@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Dimmer, Header, Icon } from 'semantic-ui-react'
 
+//no need for it
 class FollowDimmer extends Component {
   state = {
       active: false,

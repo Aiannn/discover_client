@@ -16,6 +16,13 @@ class PostCard extends React.Component {
     console.log(this.props.post)
   }
 
+  deletePost = (post) => {
+    fetch(`http://localhost:3000/posts/${post.id}`, {
+        method: 'DELETE'
+    })
+    this.props.deletePostFromPage(post)
+  }
+
   clickLike = () => {
     this.state.isLiked ? 
     this.deleteLike()
@@ -89,13 +96,26 @@ class PostCard extends React.Component {
               label={{ as: 'a', basic: true, content: this.state.likes }}
               labelPosition='right'
             />
+
+            {JSON.parse(window.localStorage.user).username === this.props.post.user.username ?
+            
+            <Button animated onClick={() => this.deletePost(this.props.post)}>
+              <Button.Content visible>Delete</Button.Content>
+              <Button.Content hidden>
+                <Icon name='trash' />
+              </Button.Content>
+            </Button>
+            :
+            null
+            }
+
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <a href={`users/${this.props.post.user.username}`}>
+          <Link to={`/users/${this.props.post.user.username}`}>
             <Icon name='user' />
               {this.props.post.user.username}
-          </a>
+          </Link>
         </Card.Content>
       </Card>
     )

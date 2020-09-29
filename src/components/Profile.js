@@ -22,6 +22,14 @@ class Profile extends React.Component {
         activeFollowings: false 
     }
 
+    deletePostFromPage = (somePost) => {
+        this.setState({
+            userPosts: this.state.userPosts.filter(
+                p => !(p.title === somePost.title && p.image === somePost.image)
+            )
+        })
+    }
+
     handleOpenFollowers = () => this.setState({ activeFollowers: true })
     handleCloseFollowers = () => this.setState({ activeFollowers: false })
 
@@ -113,7 +121,7 @@ class Profile extends React.Component {
         formData.append('track', this.state.track)
         formData.append('user', this.props.user.username)
         formData.append('title', this.state.title) 
-
+    
         fetch(`http://localhost:3000/posts`, {
             method: 'POST',
             body: formData 
@@ -267,7 +275,7 @@ class Profile extends React.Component {
                 }
 
 
-                <PostContainer posts={this.state.userPosts} />
+                <PostContainer posts={this.state.userPosts} deletePostFromPage={this.deletePostFromPage}/>
 
             </React.Fragment>
         )

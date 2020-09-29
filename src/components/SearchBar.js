@@ -58,7 +58,7 @@ class SearchBar extends React.Component {
             {(this.state.query.length===0) ? null : this.state.filteredData.map(user => 
             <Link to={`/users/${user.username}`}>
               <div>
-                <Image src={'http://localhost:3000/'+user.avatar}  />
+                <Image src={'http://localhost:3000/'+user.avatar} avatar/>
                 <span>{user.username}</span>
               </div>
             </Link>

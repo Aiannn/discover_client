@@ -8,7 +8,7 @@ class PostContainer extends React.Component {
         return this.props.posts.map(post => {
             return (
                 <React.Fragment>
-                    <PostCard post={post}/>
+                    <PostCard post={post} deletePostFromPage={this.props.deletePostFromPage}/>
                 </React.Fragment>
             )
         })

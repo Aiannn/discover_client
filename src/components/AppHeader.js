@@ -8,11 +8,17 @@ class AppHeader extends React.Component {
     render() {
         return (
             <div id='app-header'>
-                <Header as='h2'>
-                    Discover 
-                </Header>
-                <SearchBar />
-                <UserHeader user={this.props.user}/>
+                <div>
+                    <Header as='h2'>
+                        Discover 
+                    </Header>
+                </div>
+                <div>
+                    <SearchBar />
+                </div>
+                <div>
+                    <UserHeader user={this.props.user}/>
+                </div>
             </div>
         )
     }
