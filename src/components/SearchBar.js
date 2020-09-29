@@ -1,6 +1,7 @@
 import React from 'react'
 import { Image } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter, Switch, Route } from 'react-router-dom'
+import ListFromSearch from './ListFromSearch'
 
 class SearchBar extends React.Component {
     state = {
@@ -9,6 +10,11 @@ class SearchBar extends React.Component {
       filteredData: []
     };
   
+    submitHandler = e => {
+      e.preventDefault()
+      this.props.history.push('/listfromsearch')
+    }
+
     handleInputChange = e => {
       const query = e.target.value;
   
@@ -46,27 +52,32 @@ class SearchBar extends React.Component {
   
     render() {
       return (
-        <div className="searchForm" style={{marginLeft: '120%'}}> 
-          <form>
-            <input
-              placeholder="Search for..."
-              value={this.state.query}
-              onChange={this.handleInputChange}
-            />
-          </form>
-          <div>
-            {(this.state.query.length===0) ? null : this.state.filteredData.map(user => 
-            <Link to={`/users/${user.username}`}>
-              <div>
-                <Image src={'http://localhost:3000/'+user.avatar} avatar/>
-                <span>{user.username}</span>
-              </div>
-            </Link>
-            )}
+        <React.Fragment>
+          <Switch>
+            <Route exact path='/listfromsearch' render={() => <ListFromSearch query={this.state.query}/>} />
+          </Switch>
+          <div className="searchForm" style={{marginLeft: '120%'}}> 
+            <form onSubmit={this.submitHandler}>
+              <input
+                placeholder="Search for..."
+                value={this.state.query}
+                onChange={this.handleInputChange}
+              />
+            </form>
+            <div>
+              {(this.state.query.length===0) ? null : this.state.filteredData.map(user => 
+              <Link to={`/users/${user.username}`}>
+                <div>
+                  <Image src={'http://localhost:3000/'+user.avatar} avatar/>
+                  <span>{user.username}</span>
+                </div>
+              </Link>
+              )}
+            </div>
           </div>
-        </div>
-      );
+        </React.Fragment>
+      )
     }
 }
 
-export default SearchBar
+export default withRouter(SearchBar)

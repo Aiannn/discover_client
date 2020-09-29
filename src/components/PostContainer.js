@@ -1,6 +1,6 @@
 import React from 'react'
 import PostCard from './PostCard'
-import '../styles/PostContainer.css'
+// import '../styles/PostContainer.css'
 
 class PostContainer extends React.Component {
 

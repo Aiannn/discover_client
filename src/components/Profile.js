@@ -17,6 +17,8 @@ class Profile extends React.Component {
         image: '',
         track: '',
         title: '',
+        description: '',
+        hashtag: '',
         userPosts: [],
         activeFollowers: false, //it's for dimmer 
         activeFollowings: false 
@@ -121,6 +123,8 @@ class Profile extends React.Component {
         formData.append('track', this.state.track)
         formData.append('user', this.props.user.username)
         formData.append('title', this.state.title) 
+        formData.append('description', this.state.description)
+        formData.append('hashtag', this.state.hashtag)
     
         fetch(`http://localhost:3000/posts`, {
             method: 'POST',
@@ -267,6 +271,14 @@ class Profile extends React.Component {
                         <Form.Field>
                             <label>Track</label>
                             <input type='file' name='track' accept='audio/mp3, audio/mpeg' onChange={this.handleTrackPostChange}/>
+                        </Form.Field>
+                        <Form.Field>
+                            <label>Description</label>
+                            <input placeholder='Description' type='text' name='description' value={this.state.description} onChange={this.changeHandler}/>
+                        </Form.Field>
+                        <Form.Field>
+                            <label>Hashtag</label>
+                            <input placeholder='#Hashtag' type='text' name='hashtag' value={this.state.hashtag} onChange={this.changeHandler}/>
                         </Form.Field>
                         <Button onClick={this.uploadPost} type='submit' content='Upload Post' />
                     </Form>

@@ -16,6 +16,7 @@ import UserShowPage from './components/UserShowPage'
 import AppHeader from './components/AppHeader'
 import './App.css'
 import FollowDimmer from './components/FollowDimmer'
+import ListFromSearch from './components/ListFromSearch'
 
 
 class App extends React.Component {
@@ -141,7 +142,7 @@ class App extends React.Component {
           <Route exact path='/user' render={() => <Profile updateUser={this.updateUser} user={this.state.user} />} />
           <Route exact path='/users/:userName' render={() => <UserShowPage currentUser={this.state.user}/>} />
           <Route exact path='/foryou' render={() => <ForYou />} />
-          {/* <Route exact path='/users/:userName/follows' render={() => <FollowDimmer />} /> */}
+          {/* <Route exact path='/listfromsearch' render={() => <ListFromSearch />} /> */}
         </div>
       </Switch>
     )

@@ -80,11 +80,18 @@ class PostCard extends React.Component {
   render() {
     return (
       <Card>
+        <Card.Content extra>
+          <Link to={`/users/${this.props.post.user.username}`}>
+            <Icon name='user' />
+              {this.props.post.user.username}
+          </Link>
+        </Card.Content>
+
         <Image src={'http://localhost:3000/'+this.props.post.image} wrapped ui={false} />
         <Card.Content>
           <Card.Header>{this.props.post.title}</Card.Header>
           <Card.Meta>
-            <span className='date'>Joined in 2015</span>
+            <span className='date'>{this.props.post.description}</span>
           </Card.Meta>
           <Card.Description>
             <audio src={'http://localhost:3000/'+this.props.post.track} controls></audio>
@@ -112,10 +119,12 @@ class PostCard extends React.Component {
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <Link to={`/users/${this.props.post.user.username}`}>
-            <Icon name='user' />
-              {this.props.post.user.username}
-          </Link>
+          <a style={{marginRight: '20%'}}>
+            <span>{this.props.post.hashtag}</span>
+          </a>
+          <a>
+            <span>{(this.props.post.created_at).toLocaleString()}</span>
+          </a>
         </Card.Content>
       </Card>
     )
