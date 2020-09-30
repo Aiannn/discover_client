@@ -1,4 +1,5 @@
 import React from 'react'
+import { Card, Form, Button} from 'semantic-ui-react'
 
 class SignUp extends React.Component {
 
@@ -20,14 +21,22 @@ class SignUp extends React.Component {
 
     render() {
         return (
-            <div>
-                <h3>Sign Up</h3>
-                <form onSubmit={this.submitHandler}>
-                    <input type='text' name='username' onChange={this.changeHandler} value={this.state.username} placeholder='Enter Username' />
-                    <input type='text' name='password' onChange={this.changeHandler} value={this.state.password} placeholder='Enter Password' />
-                    <input type='submit' value='Sign Up' />
-                </form>
-            </div>
+        <Card>
+            <h3>Sign Up</h3>
+            <Form onSubmit={this.submitHandler}>
+                <Form.Field>
+                    <label>Username</label>
+                    <input placeholder='Enter Username' type='text' name='username' onChange={this.changeHandler} value={this.state.username} />
+                </Form.Field>
+                <Form.Field>
+                    <label>Password</label>
+                    <input placeholder='Enter Password' type='text' name='password' onChange={this.changeHandler} value={this.state.password} />
+                </Form.Field>
+                <Form.Field>
+                    <Button type='submit'>Sign Up</Button>
+                </Form.Field>
+            </Form>
+        </Card>
         )
     }
 }

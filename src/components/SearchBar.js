@@ -56,10 +56,10 @@ class SearchBar extends React.Component {
           <Switch>
             <Route exact path='/listfromsearch' render={() => <ListFromSearch query={this.state.query}/>} />
           </Switch>
-          <div className="searchForm" style={{marginLeft: '120%'}}> 
+          <div className="searchForm"> 
             <form onSubmit={this.submitHandler}>
               <input
-                placeholder="Search for..."
+                placeholder="Search by username/hashtag"
                 value={this.state.query}
                 onChange={this.handleInputChange}
               />
@@ -68,7 +68,7 @@ class SearchBar extends React.Component {
               {(this.state.query.length===0) ? null : this.state.filteredData.map(user => 
               <Link to={`/users/${user.username}`}>
                 <div>
-                  <Image src={'http://localhost:3000/'+user.avatar} avatar/>
+                  <Image circular src={'http://localhost:3000/'+user.avatar} height='50px'/>
                   <span>{user.username}</span>
                 </div>
               </Link>

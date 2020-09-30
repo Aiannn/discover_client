@@ -1,6 +1,7 @@
 import React from 'react'
 import PostCard from './PostCard'
-// import '../styles/PostContainer.css'
+// import { Grid } from 'semantic-ui-react'
+import '../styles/PostContainer.css'
 
 class PostContainer extends React.Component {
 
@@ -25,4 +26,5 @@ class PostContainer extends React.Component {
 }
     
 export default PostContainer
+
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Icon, Image } from 'semantic-ui-react'
 import { Button } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 class PostCard extends React.Component {
 
@@ -104,7 +104,8 @@ class PostCard extends React.Component {
               labelPosition='right'
             />
 
-            {JSON.parse(window.localStorage.user).username === this.props.post.user.username ?
+            {JSON.parse(window.localStorage.user).username === this.props.post.user.username 
+            && this.props.match.path === '/user' ?
             
             <Button animated onClick={() => this.deletePost(this.props.post)}>
               <Button.Content visible>Delete</Button.Content>
@@ -131,4 +132,4 @@ class PostCard extends React.Component {
   }
 }
 
-export default PostCard 
+export default withRouter(PostCard) 

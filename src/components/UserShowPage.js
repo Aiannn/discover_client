@@ -154,7 +154,7 @@ class UserShowPage extends React.Component {
                             <Header.Subheader>
                                 <div>
                                     {this.state.otherUser.followers && this.state.otherUser.followers.map(i => 
-                                    <Link to={`/users/${i.username}`} >
+                                    <Link to={JSON.parse(localStorage.user).username!==i.username ? `/users/${i.username}` : `/user`} >
                                         <p>
                                             {i.username}
                                         </p>
@@ -176,7 +176,7 @@ class UserShowPage extends React.Component {
                             <Header.Subheader>
                                 <div>
                                     {this.state.otherUser.followees && this.state.otherUser.followees.map(i => 
-                                    <Link to={`/users/${i.username}`} >
+                                    <Link to={JSON.parse(localStorage.user).username!==i.username ? `/users/${i.username}` : `/user`} >
                                         <p>
                                             {i.username}
                                         </p>

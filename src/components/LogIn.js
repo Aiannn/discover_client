@@ -1,4 +1,6 @@
 import React from 'react'
+import { Button, Form, Card } from 'semantic-ui-react'
+import '../styles/LogIn.css'
 
 class LogIn extends React.Component {
 
@@ -20,16 +22,25 @@ class LogIn extends React.Component {
 
     render() {
         return (
-            <div>
+            <Card>
                 <h3>Log In</h3>
-                <form onSubmit={this.submitHandler}>
-                    <input type='text' name='username' onChange={this.changeHandler} value={this.state.username} placeholder='Enter Username' />
-                    <input type='text' name='password' onChange={this.changeHandler} value={this.state.password} placeholder='Enter Password' />
-                    <input type='submit' value='Log In' />
-                </form>
-            </div>
+                <Form onSubmit={this.submitHandler}>
+                    <Form.Field>
+                        <label>Username</label>
+                        <input placeholder='Enter Username' type='text' name='username' onChange={this.changeHandler} value={this.state.username} />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Password</label>
+                        <input placeholder='Enter Password' type='text' name='password' onChange={this.changeHandler} value={this.state.password} />
+                    </Form.Field>
+                    <Form.Field>
+                        <Button type='submit'>Log In</Button>
+                    </Form.Field>
+                </Form>
+            </Card>
         )
     }
 }
+
 
 export default LogIn

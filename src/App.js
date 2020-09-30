@@ -8,15 +8,11 @@ import About from './components/About'
 import Liked from './components/Liked'
 import SignUp from './components/SignUp'
 import LogIn from './components/LogIn'
-import User from './components/User'
-import Users from './components/Users'
 import Profile from './components/Profile'
 import ForYou from './components/ForYou'
 import UserShowPage from './components/UserShowPage'
 import AppHeader from './components/AppHeader'
 import './App.css'
-import FollowDimmer from './components/FollowDimmer'
-import ListFromSearch from './components/ListFromSearch'
 
 
 class App extends React.Component {

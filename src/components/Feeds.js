@@ -21,9 +21,9 @@ class Feeds extends React.Component {
         })
         .then(response => response.json())
         .then(data => {
-          console.log(data.posts[0])
+          console.log(data)
           this.setState({
-            postsArray: data.posts[0]
+            postsArray: data
           })
         })
       }

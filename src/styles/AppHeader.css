@@ -1,9 +1,14 @@
 #app-header {
     position: absolute;
-    top: 0%;
-    left: 0%;
-    /* height: 60px;
+    top: 10px;
+    left: 50px;
+    height: 60px;
     width: 100%;
-    justify-content: space-between; */
+    justify-content: space-between
 } 
-/* no need so far */
+
+.child {
+    position: relative;
+    margin-right: 25%;
+    float: left;
+}

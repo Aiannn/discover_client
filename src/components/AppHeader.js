@@ -8,20 +8,27 @@ class AppHeader extends React.Component {
     render() {
         return (
             <div id='app-header'>
-                <div>
+                <div className='child'>
                     <Header as='h2'>
                         Discover 
                     </Header>
                 </div>
-                <div>
-                    <SearchBar />
-                </div>
-                <div>
-                    <UserHeader user={this.props.user}/>
-                </div>
+                {window.localStorage.length > 0 ?
+                <React.Fragment>
+                    <div className='child'>
+                        <SearchBar />
+                    </div>
+                    <div className='child'>
+                        <UserHeader user={this.props.user}/>
+                    </div>
+                </React.Fragment>
+                :
+                null
+                }
             </div>
         )
     }
 }
 
 export default AppHeader
+
