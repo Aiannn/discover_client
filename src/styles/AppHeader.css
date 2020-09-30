@@ -1,14 +1,17 @@
 #app-header {
     position: absolute;
-    top: 10px;
-    left: 50px;
+    top: 0;
+    left: 0;
     height: 60px;
     width: 100%;
-    justify-content: space-between
+    justify-content: space-between;
+    background-color: grey;
 } 
 
 .child {
     position: relative;
-    margin-right: 25%;
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 23%;
     float: left;
 }

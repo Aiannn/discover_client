@@ -1,7 +1,8 @@
 import React from 'react'
 import { Image } from 'semantic-ui-react'
-import { Link, withRouter, Switch, Route } from 'react-router-dom'
+import { Link, withRouter, Switch, Route, Redirect} from 'react-router-dom'
 import ListFromSearch from './ListFromSearch'
+// import '../styles/SearchBar.css'
 
 class SearchBar extends React.Component {
     state = {
@@ -13,6 +14,7 @@ class SearchBar extends React.Component {
     submitHandler = e => {
       e.preventDefault()
       this.props.history.push('/listfromsearch')
+      // <Redirect to='/listfromsearch' />
     }
 
     handleInputChange = e => {
@@ -59,10 +61,12 @@ class SearchBar extends React.Component {
           <div className="searchForm"> 
             <form onSubmit={this.submitHandler}>
               <input
+                className='searchTerm' 
                 placeholder="Search by username/hashtag"
                 value={this.state.query}
                 onChange={this.handleInputChange}
               />
+              <input type='submit' value='Search!' className='searchButton' />
             </form>
             <div>
               {(this.state.query.length===0) ? null : this.state.filteredData.map(user => 

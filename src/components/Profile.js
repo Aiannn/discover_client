@@ -1,7 +1,6 @@
 import React from 'react'
 import { Card, Icon, Image, Button, Form, FormField, Dimmer, Header } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-import '../styles/User.css'
 import PostContainer from './PostContainer'
 
 class Profile extends React.Component {
@@ -155,137 +154,138 @@ class Profile extends React.Component {
         // const { active } = this.state
         return (
             <React.Fragment>
-                <Card>
-                    <Image src={'http://localhost:3000/'+this.props.user.avatar} alt={this.props.user.name} wrapped ui={false} circular/>
-                    <Card.Content>
-                    <Card.Header>
-                        {this.props.user.username}
-                    </Card.Header>
-                    <Card.Meta>
-                        <span className='date'>{this.props.user.name}</span>
-                    </Card.Meta>
-                    <Card.Description>
-                        <div>Date of Birth: {this.props.user.date_of_birth}</div>
-                        <div>Bio: {this.props.user.bio}</div>
-                        <div>Email: {this.props.user.email}</div>
-                        <div>Total likes: {this.props.user.total_likes}</div>
-                    </Card.Description>
-                    </Card.Content>
-                    <Card.Content extra>
+                <div id='user-profile'>
+                    <Card>
+                        <Image src={'http://localhost:3000/'+this.props.user.avatar} alt={this.props.user.name} wrapped ui={false} circular/>
+                        <Card.Content>
+                        <Card.Header>
+                            {this.props.user.username}
+                        </Card.Header>
+                        <Card.Meta>
+                            <span className='date'>{this.props.user.name}</span>
+                        </Card.Meta>
+                        <Card.Description>
+                            <div>Date of Birth: {this.props.user.date_of_birth}</div>
+                            <div>Bio: {this.props.user.bio}</div>
+                            <div>Email: {this.props.user.email}</div>
+                            <div>Total likes: {this.props.user.total_likes}</div>
+                        </Card.Description>
+                        </Card.Content>
+                        <Card.Content extra>
 
-                    <a onClick={this.handleOpenFollowers}>
-                        <Icon name='user' />
-                        Followers {this.props.user.followers && this.props.user.followers.length}
-                    </a>
-                    <Dimmer active={this.state.activeFollowers} onClickOutside={this.handleCloseFollowers} page>
-                        <Header as='h2' icon inverted>
+                        <a onClick={this.handleOpenFollowers}>
                             <Icon name='user' />
-                                Followers
-                            <Header.Subheader>
-                                <div>
-                                    {this.props.user.followers && this.props.user.followers.map(i => 
-                                    <Link to={`/users/${i.username}`} >
-                                        <p>
-                                            {i.username}
-                                        </p>
-                                    </Link>
-                                    )}
-                                </div>
-                            </Header.Subheader>
-                        </Header>
-                    </Dimmer>
+                            Followers {this.props.user.followers && this.props.user.followers.length}
+                        </a>
+                        <Dimmer active={this.state.activeFollowers} onClickOutside={this.handleCloseFollowers} page>
+                            <Header as='h2' icon inverted>
+                                <Icon name='user' />
+                                    Followers
+                                <Header.Subheader>
+                                    <div>
+                                        {this.props.user.followers && this.props.user.followers.map(i => 
+                                        <Link to={`/users/${i.username}`} >
+                                            <p>
+                                                {i.username}
+                                            </p>
+                                        </Link>
+                                        )}
+                                    </div>
+                                </Header.Subheader>
+                            </Header>
+                        </Dimmer>
 
-                    <a onClick={this.handleOpenFollowings}>
-                        <Icon name='user' />
-                        Followings {this.props.user.followees && this.props.user.followees.length}
-                    </a>
-                    <Dimmer active={this.state.activeFollowings} onClickOutside={this.handleCloseFollowings} page>
-                        <Header as='h2' icon inverted>
+                        <a onClick={this.handleOpenFollowings}>
                             <Icon name='user' />
-                                Followings
-                            <Header.Subheader>
-                                <div>
-                                    {this.props.user.followees && this.props.user.followees.map(i => 
-                                    <Link to={`/users/${i.username}`} >
-                                        <p>
-                                            {i.username}
-                                        </p>
-                                    </Link>
-                                    )}
-                                </div>
-                            </Header.Subheader>
-                        </Header>
-                    </Dimmer>
+                            Followings {this.props.user.followees && this.props.user.followees.length}
+                        </a>
+                        <Dimmer active={this.state.activeFollowings} onClickOutside={this.handleCloseFollowings} page>
+                            <Header as='h2' icon inverted>
+                                <Icon name='user' />
+                                    Followings
+                                <Header.Subheader>
+                                    <div>
+                                        {this.props.user.followees && this.props.user.followees.map(i => 
+                                        <Link to={`/users/${i.username}`} >
+                                            <p>
+                                                {i.username}
+                                            </p>
+                                        </Link>
+                                        )}
+                                    </div>
+                                </Header.Subheader>
+                            </Header>
+                        </Dimmer>
 
-                    </Card.Content>
-                </Card>
-                <Button 
-                    onClick={this.displayUpdateForm}
-                    content='Update Profile'
-                    icon='plus square'
-                    labelPosition='left'
-                />
-                <Button 
-                    onClick={this.displayUpdateFormTwo}
-                    content='Upload Post'
-                    icon='upload'
-                    labelPosition='left'
-                />
-                {this.state.display ? 
-                    <Form>
-                        <Form.Field>
-                        <label>Name</label>
-                        <input placeholder='Name' type='text' name='name' value={this.state.name} onChange={this.changeHandler}/>
-                        </Form.Field>
-                        <Form.Field>
-                        <label>Date of Birth</label>
-                        <input placeholder='Date of birth' type='text' name='date_of_birth' value={this.state.date_of_birth} onChange={this.changeHandler}/>
-                        </Form.Field>
-                        <Form.Field>
-                        <label>Bio</label>
-                        <input placeholder='Bio' type='text' name='bio' value={this.state.bio} onChange={this.changeHandler}/>
-                        </Form.Field>
-                        <Form.Field>
-                        <label>Email</label>
-                        <input placeholder='Email' type='text' name='email' value={this.state.email} onChange={this.changeHandler}/>
-                        </Form.Field>
-                        <Form.Field>
-                        <label>Avatar</label>
-                        <input type='file' name='avatar' accept='image/png, image/jpeg' onChange={this.handleImageChange}/>
-                        </Form.Field>
-                        <Button onClick={this.updateUserInfo} type='submit' content='Update Profile' />
-                    </Form>
-                    :
-                    null
-                }
-                {this.state.display2 ?
-                    <Form>
-                        <Form.Field>
-                            <label>Title</label>
-                            <input placeholder='Title' type='text' name='title' value={this.state.title} onChange={this.changeHandler} />
-                        </Form.Field>
-                        <Form.Field>
-                            <label>Image</label>
-                            <input type='file' name='image' accept='image/png, image/jpeg' onChange={this.handleImagePostChange} />
-                        </Form.Field>
-                        <Form.Field>
-                            <label>Track</label>
-                            <input type='file' name='track' accept='audio/mp3, audio/mpeg' onChange={this.handleTrackPostChange}/>
-                        </Form.Field>
-                        <Form.Field>
-                            <label>Description</label>
-                            <input placeholder='Description' type='text' name='description' value={this.state.description} onChange={this.changeHandler}/>
-                        </Form.Field>
-                        <Form.Field>
-                            <label>Hashtag</label>
-                            <input placeholder='#Hashtag' type='text' name='hashtag' value={this.state.hashtag} onChange={this.changeHandler}/>
-                        </Form.Field>
-                        <Button onClick={this.uploadPost} type='submit' content='Upload Post' />
-                    </Form>
-                    :
-                    null
-                }
-
+                        </Card.Content>
+                    </Card>
+                    <Button 
+                        onClick={this.displayUpdateForm}
+                        content='Update Profile'
+                        icon='plus square'
+                        labelPosition='left'
+                    />
+                    <Button 
+                        onClick={this.displayUpdateFormTwo}
+                        content='Upload Post'
+                        icon='upload'
+                        labelPosition='left'
+                    />
+                    {this.state.display ? 
+                        <Form>
+                            <Form.Field>
+                            <label>Name</label>
+                            <input placeholder='Name' type='text' name='name' value={this.state.name} onChange={this.changeHandler}/>
+                            </Form.Field>
+                            <Form.Field>
+                            <label>Date of Birth</label>
+                            <input placeholder='Date of birth' type='text' name='date_of_birth' value={this.state.date_of_birth} onChange={this.changeHandler}/>
+                            </Form.Field>
+                            <Form.Field>
+                            <label>Bio</label>
+                            <input placeholder='Bio' type='text' name='bio' value={this.state.bio} onChange={this.changeHandler}/>
+                            </Form.Field>
+                            <Form.Field>
+                            <label>Email</label>
+                            <input placeholder='Email' type='text' name='email' value={this.state.email} onChange={this.changeHandler}/>
+                            </Form.Field>
+                            <Form.Field>
+                            <label>Avatar</label>
+                            <input type='file' name='avatar' accept='image/png, image/jpeg' onChange={this.handleImageChange}/>
+                            </Form.Field>
+                            <Button onClick={this.updateUserInfo} type='submit' content='Update Profile' />
+                        </Form>
+                        :
+                        null
+                    }
+                    {this.state.display2 ?
+                        <Form>
+                            <Form.Field>
+                                <label>Title</label>
+                                <input placeholder='Title' type='text' name='title' value={this.state.title} onChange={this.changeHandler} />
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Image</label>
+                                <input type='file' name='image' accept='image/png, image/jpeg' onChange={this.handleImagePostChange} />
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Track</label>
+                                <input type='file' name='track' accept='audio/mp3, audio/mpeg' onChange={this.handleTrackPostChange}/>
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Description</label>
+                                <input placeholder='Description' type='text' name='description' value={this.state.description} onChange={this.changeHandler}/>
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Hashtag</label>
+                                <input placeholder='#Hashtag' type='text' name='hashtag' value={this.state.hashtag} onChange={this.changeHandler}/>
+                            </Form.Field>
+                            <Button onClick={this.uploadPost} type='submit' content='Upload Post' />
+                        </Form>
+                        :
+                        null
+                    }
+                </div>
 
                 <PostContainer posts={this.state.userPosts} deletePostFromPage={this.deletePostFromPage}/>
 

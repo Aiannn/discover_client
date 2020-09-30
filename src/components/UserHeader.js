@@ -1,7 +1,6 @@
 import React from 'react'
 import { Header, Image } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-import '../styles/UserHeader.css'
 
 const UserHeader = (props) => (
     <Link to='/user'>
