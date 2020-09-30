@@ -52,6 +52,20 @@ class UserShowPage extends React.Component {
             })
         })
     }
+    
+    componentWillMount() {
+        fetch(`http://localhost:3000/api/v1/users/${this.props.match.params.userName}`)
+        .then(resp => resp.json())
+        .then(data => {
+            console.log(data.user)
+            this.setState({
+                otherUser: data.user,
+                hisPosts: data.user.posts,
+                followers: data.user.followers.length,
+                isFollowed: this.checkUserFollowed() ? true : false
+            })
+        })
+    }
 
     checkUserFollowed = () => {
         let i = 0
