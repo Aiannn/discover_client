@@ -40,11 +40,20 @@
 html body {
   color: white;
 
-  background-image: url('./styles/background.jpg');
+  background-image: url('./styles/wallp.jpg');
 
-  height: 100%;
+  height: fit-content;
 
   background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+}
+
+.auth-form {
+  position: relative;
+  /* margin: auto auto auto auto; */
+  /* top: auto; */
+  /* bottom: auto; */
+  /* left: auto; */
+  /* right: auto */
+  top: 200px;
+  left: 700px;
 }

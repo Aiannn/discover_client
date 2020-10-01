@@ -117,7 +117,7 @@ class UserShowPage extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Card>
+                <Card centered>
                     <Image src={'http://localhost:3000/'+this.state.otherUser.avatar} alt={this.state.otherUser.name} wrapped ui={false} />
                     <Card.Content>
                     <Card.Header>

@@ -127,8 +127,8 @@ class App extends React.Component {
     return (
       <Switch>
         <div>
-          <AppHeader user={this.state.user} />
-          <NavBar logoutHandler={this.logoutHandler} user={this.state.user}/>
+          <AppHeader logoutHandler={this.logoutHandler} user={this.state.user} />
+          {/* <NavBar logoutHandler={this.logoutHandler} user={this.state.user}/> */}
           {/* <UserHeader user={this.state.user} /> */}
           <Route exact path='/feeds' render={() => <Feeds />} />
           <Route exact path='/about' render={() => <About />} />

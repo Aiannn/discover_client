@@ -154,8 +154,8 @@ class Profile extends React.Component {
         // const { active } = this.state
         return (
             <React.Fragment>
-                <div id='user-profile'>
-                    <Card>
+                {/* <div id='user-profile'> */}
+                    <Card centered>
                         <Image src={'http://localhost:3000/'+this.props.user.avatar} alt={this.props.user.name} wrapped ui={false} circular/>
                         <Card.Content>
                         <Card.Header>
@@ -233,23 +233,23 @@ class Profile extends React.Component {
                     />
                     {this.state.display ? 
                         <Form>
-                            <Form.Field>
+                            <Form.Field width={5}>
                             <label>Name</label>
                             <input placeholder='Name' type='text' name='name' value={this.state.name} onChange={this.changeHandler}/>
                             </Form.Field>
-                            <Form.Field>
+                            <Form.Field width={5}>
                             <label>Date of Birth</label>
                             <input placeholder='Date of birth' type='text' name='date_of_birth' value={this.state.date_of_birth} onChange={this.changeHandler}/>
                             </Form.Field>
-                            <Form.Field>
+                            <Form.Field width={5}>
                             <label>Bio</label>
                             <input placeholder='Bio' type='text' name='bio' value={this.state.bio} onChange={this.changeHandler}/>
                             </Form.Field>
-                            <Form.Field>
+                            <Form.Field width={5}>
                             <label>Email</label>
                             <input placeholder='Email' type='text' name='email' value={this.state.email} onChange={this.changeHandler}/>
                             </Form.Field>
-                            <Form.Field>
+                            <Form.Field width={5}>
                             <label>Avatar</label>
                             <input type='file' name='avatar' accept='image/png, image/jpeg' onChange={this.handleImageChange}/>
                             </Form.Field>
@@ -260,23 +260,23 @@ class Profile extends React.Component {
                     }
                     {this.state.display2 ?
                         <Form>
-                            <Form.Field>
+                            <Form.Field width={5}>
                                 <label>Title</label>
                                 <input placeholder='Title' type='text' name='title' value={this.state.title} onChange={this.changeHandler} />
                             </Form.Field>
-                            <Form.Field>
+                            <Form.Field width={5}>
                                 <label>Image</label>
                                 <input type='file' name='image' accept='image/png, image/jpeg' onChange={this.handleImagePostChange} />
                             </Form.Field>
-                            <Form.Field>
+                            <Form.Field width={5}>
                                 <label>Track</label>
                                 <input type='file' name='track' accept='audio/mp3, audio/mpeg' onChange={this.handleTrackPostChange}/>
                             </Form.Field>
-                            <Form.Field>
+                            <Form.Field width={5}>
                                 <label>Description</label>
                                 <input placeholder='Description' type='text' name='description' value={this.state.description} onChange={this.changeHandler}/>
                             </Form.Field>
-                            <Form.Field>
+                            <Form.Field width={5}>
                                 <label>Hashtag</label>
                                 <input placeholder='#Hashtag' type='text' name='hashtag' value={this.state.hashtag} onChange={this.changeHandler}/>
                             </Form.Field>
@@ -285,7 +285,7 @@ class Profile extends React.Component {
                         :
                         null
                     }
-                </div>
+                {/* </div> */}
 
                 <PostContainer posts={this.state.userPosts} deletePostFromPage={this.deletePostFromPage}/>
 
