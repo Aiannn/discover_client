@@ -37,7 +37,23 @@
   }
 }
 
-body {
-  background: linear-gradient(90deg, rgba(2,0,36,0.470356308411215) 100%, rgba(250,135,1,1) 100%);
+html body {
+  color: white;
 
+  background-image: url('./styles/wallp.jpg');
+
+  height: fit-content;
+
+  background-position: center;
+}
+
+.auth-form {
+  position: relative;
+  /* margin: auto auto auto auto; */
+  /* top: auto; */
+  /* bottom: auto; */
+  /* left: auto; */
+  /* right: auto */
+  top: 200px;
+  left: 700px;
 }

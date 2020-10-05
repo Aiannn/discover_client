@@ -1,7 +1,7 @@
 import React from 'react'
 import PostContainer from './PostContainer'
 
-class Feeds extends React.Component {
+class ListFromSearch extends React.Component {
 
     state = {
         postsArray: []
@@ -9,33 +9,32 @@ class Feeds extends React.Component {
 
     componentDidMount() {
         this.getPosts()
+        this.filterArray()
     }
 
     getPosts = () => {
-        const token = localStorage.getItem('token')
-        fetch('http://localhost:3000/feeds', {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
+        fetch('http://localhost:3000/posts')
         .then(response => response.json())
         .then(data => {
-          console.log(data)
           this.setState({
             postsArray: data
           })
         })
-      }
+    }
+
+    filterArray = () => {
+        return this.state.postsArray.filter(post => {
+            return post.hashtag === this.props.query
+        })
+    }
 
     render() {
         return (
             <div>
-                <PostContainer posts={this.state.postsArray} />
+                <PostContainer posts={this.filterArray()}/>
             </div>
         )
     }
 }
 
-
-export default Feeds
+export default ListFromSearch
