@@ -1,5 +1,3 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Available Scripts
 
 In the project directory, you can run:
@@ -66,3 +64,9 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+## Discover 
+
+Everyone loves listen to music. Someone loves create music. This application allows people to get assessed with their music. The most liked and hot singles go to the special page, where other users can see it!
+
+### `[Demo]`(https://www.youtube.com/watch?v=OwKp8QCToaA&feature=youtu.be)
