@@ -69,4 +69,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 Everyone loves listen to music. Someone loves create music. This application allows people to get assessed with their music. The most liked and hot singles go to the special page, where other users can see it!
 
-### `[Demo](https://www.youtube.com/watch?v=OwKp8QCToaA&feature=youtu.be)`
+### [Demo](https://www.youtube.com/watch?v=OwKp8QCToaA&feature=youtu.be)
