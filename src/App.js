@@ -8,8 +8,10 @@ import About from './components/About'
 import Liked from './components/Liked'
 import SignUp from './components/SignUp'
 import LogIn from './components/LogIn'
-import User from './components/User'
-import Users from './components/Users'
+import Profile from './components/Profile'
+import ForYou from './components/ForYou'
+import UserShowPage from './components/UserShowPage'
+import AppHeader from './components/AppHeader'
 import './App.css'
 
 
@@ -125,14 +127,18 @@ class App extends React.Component {
     return (
       <Switch>
         <div>
-          <NavBar  logoutHandler={this.logoutHandler} user={this.state.user}/>
+          <AppHeader logoutHandler={this.logoutHandler} user={this.state.user} />
+          {/* <NavBar logoutHandler={this.logoutHandler} user={this.state.user}/> */}
+          {/* <UserHeader user={this.state.user} /> */}
           <Route exact path='/feeds' render={() => <Feeds />} />
           <Route exact path='/about' render={() => <About />} />
           <Route exact path='/liked' render={() => <Liked />} />
           <Route exact path='/signup' render={() => <SignUp signupHandler={this.signupHandler}/>} />
           <Route exact path='/login' render={() => <LogIn loginHandler={this.loginHandler}/>} />
-          <Route exact path='/user' render={() => <User updateUser={this.updateUser} user={this.state.user} />} />
-          <Route exact path='/users/:userName' render={() => <Users currentUser={this.state.user}/>} />
+          <Route exact path='/user' render={() => <Profile updateUser={this.updateUser} user={this.state.user} />} />
+          <Route exact path='/users/:userName' render={() => <UserShowPage currentUser={this.state.user}/>} />
+          <Route exact path='/foryou' render={() => <ForYou />} />
+          {/* <Route exact path='/listfromsearch' render={() => <ListFromSearch />} /> */}
         </div>
       </Switch>
     )

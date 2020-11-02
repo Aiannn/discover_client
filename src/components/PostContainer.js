@@ -1,17 +1,24 @@
 import React from 'react'
-import Post from './Post'
+import PostCard from './PostCard'
+// import { Grid } from 'semantic-ui-react'
+import '../styles/PostContainer.css'
 
 class PostContainer extends React.Component {
 
     getPosts = () => {
         return this.props.posts.map(post => {
-            return <Post post={post} />
+            return (
+                <React.Fragment>
+                    <PostCard post={post} deletePostFromPage={this.props.deletePostFromPage}/>
+                </React.Fragment>
+            )
         })
     }
 
+
     render() {
         return (
-            <div>
+            <div className='post-container'>
                 {this.getPosts()}
             </div>
         )
@@ -19,4 +26,5 @@ class PostContainer extends React.Component {
 }
     
 export default PostContainer
+
 
