@@ -79,14 +79,14 @@ Make sure you have React, Ruby and Rails installed and PostgreSQL server running
 ### Installation 
 1. Fork and clone [backend repo](https://github.com/Aiannn/discover_server)
 2. In your terminal enter:
-### `cd discover_server`
-### `bundle install`
+`cd discover_server`
+`bundle install`
 3. Fork and clone frontend (this) repo 
 4. In your terminal enter:
-### `cd discover_client`
-### `npm install`
+`cd discover_client`
+`npm install`
 5. From backend terminal tab enter:
-### `npm start`
+`npm start`
 
 ## Usage 
 1. Sign Up
