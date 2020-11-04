@@ -87,3 +87,7 @@ Make sure you have React, Ruby and Rails installed and PostgreSQL server running
 ### `npm install`
 5. From backend terminal tab enter:
 ### `npm start`
+
+## Usage 
+1. Sign Up
+2. 
